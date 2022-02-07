@@ -1,23 +1,21 @@
 chrome.tabs.onUpdated.addListener((tabId) => {
-    try {
-        chrome.tabs.executeScript(tabId, { file: './src/oncopy.js' });    
-    } catch(err) {}
+    chrome.tabs.executeScript(tabId, { file: './src/oncopy.js' }, () => chrome.runtime.lastError);    
 });
 
 chrome.runtime.onMessage.addListener((request) => {
     if (request.command === 'copy') {
-        const plainText = request.textContent?.replace(/(\r\n|\n|\r)/gm, '');
-        writeCopiedPlainTextToKeyBoardBuffer(plainText);
-     }
+        const plainText = request.textContent?.trim();
+        writeCopiedPlainTextToKeyboardBuffer(plainText);
+    }
 });
 
-const writeCopiedPlainTextToKeyBoardBuffer = plainText => {
+const writeCopiedPlainTextToKeyboardBuffer = plainText => {
     const textArea = createTextAreaElementWithFocus(plainText);
 
     try {
         document.execCommand('copy');
     } catch (err) {
-        console.error('KeyBoard buffer: Oops, unable to write plain text', err);
+        console.error('Keyboard buffer: Oops, unable to write plain text', err);
     }
 
     document.body.removeChild(textArea);
