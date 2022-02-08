@@ -1,6 +1,8 @@
 document.addEventListener('copy', () => {
+    const plaintText = window.getSelection()?.toString()?.trim();
+
     const textArea = document.createElement('textarea');
-    textArea.value = window.getSelection()?.toString()?.trim();
+    textArea.value = plaintText;
 
     textArea.style.top = '0';
     textArea.style.left = '0';
