@@ -9,7 +9,6 @@
   },
 
   "permissions": [
-    "tabs",
     "scripting"
   ],
   "host_permissions": [
