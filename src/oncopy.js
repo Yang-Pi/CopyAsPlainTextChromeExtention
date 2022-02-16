@@ -1,22 +1,11 @@
-document.addEventListener('copy', () => {
-    const plaintText = window.getSelection()?.toString()?.trim();
-
-    const textArea = document.createElement('textarea');
-    textArea.value = plaintText;
-
-    textArea.style.top = '0';
-    textArea.style.left = '0';
-    textArea.style.position = 'fixed';
-
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-
+document.addEventListener('copy', async (e) => {
+    e.preventDefault();
     try {
-        document.execCommand('cut');
+        const plaintText = window.getSelection()?.toString()?.trim();
+        if (plaintText) {
+            await navigator.clipboard.writeText(plaintText);
+        }
     } catch (err) {
-        console.error('Keyboard buffer: Oops, unable to write plain text', err);
+      console.error(err.name, err.message);
     }
-
-    document.body.removeChild(textArea);
-});
+  });
