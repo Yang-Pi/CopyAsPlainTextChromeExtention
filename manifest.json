@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Plane Text",
   "description": "Copy text from a webpage as plain strings",
-  "version": "1.0.0",
+  "version": "1.0.2",
   
   "background": {
     "service_worker": "./src/background.js"
