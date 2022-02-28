@@ -20,8 +20,9 @@ document.addEventListener('copy', async (e) => {
           if (imageContent) {
             plainText
               += (plainText === '' ? '' : '\n')
-                + imageContent.currentSrc
-                + '\n';
+                + '<<< IMAGE >>>' + '\n'
+                + imageContent.currentSrc + '\n'
+                + '<<< IMAGE >>>';
           }
         }
 
