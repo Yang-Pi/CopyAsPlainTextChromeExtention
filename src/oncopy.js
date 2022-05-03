@@ -21,10 +21,14 @@ document.addEventListener('copy', async (e) => {
             plainText
               += (plainText === '' ? '' : '\n')
                 + '<<< IMAGE >>>' + '\n'
-                + imageContent.currentSrc + '\n'
+                + (imageContent.currentSrc || imageContent.baseURI) + '\n'
                 + '<<< IMAGE >>>';
           }
         }
+
+        plainText = plainText === ''
+          ? window.getSelection()?.toString()
+          : plainText;
 
         if (plainText) {
             await navigator.clipboard.writeText(plainText);
